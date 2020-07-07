@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:9999}
+spring:
+  application:
+    name: projectjoa-apigw
+zuul:
+  routes:
+    projectjoa-servicea:
+      path: /japi/**
+      service-id: projectjoa-servicea
+      strip-prefix: false
+  retryable: true
+  host:
+    connect-timeout-millis: 600000
+    socket-timeout-millis: 600000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_SERVER_URL:127.0.0.1}:${PORT:9065}/eureka
+
