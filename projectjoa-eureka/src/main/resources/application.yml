@@ -1,0 +1,15 @@
+server:
+  port: ${PORT:9065}
+spring:
+  application:
+    name: projectjoa-eureka
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${EUREKA_SERVER_URL:127.0.0.1}:${PORT:9065}/eureka
+  server:
+    enable-self-preservation: true
