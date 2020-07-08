@@ -6,8 +6,12 @@ spring:
 zuul:
   routes:
     projectjoa-servicea:
-      path: /japi/**
+      path: /**
       service-id: projectjoa-servicea
+      strip-prefix: false
+    projectjoa-pyserviceb:
+      path: /projectjoa-pyserviceb/**
+      service-id: projectjoa-pyserviceb
       strip-prefix: false
   retryable: true
   host:
