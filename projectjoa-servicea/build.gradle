@@ -36,3 +36,9 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
+
+bootJar {
+    libsDirName = '../'
+	archiveFileName = rootProject.name+'-'+version+'.jar'
+	archiveVersion = version
+}
