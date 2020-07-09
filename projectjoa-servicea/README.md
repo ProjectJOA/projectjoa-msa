@@ -11,5 +11,7 @@ gradlew bootJar
 ```
 
 디렉토리에 아래 jar 파일이 생성된다.
+```
 projectjoa-servicea
  - projectjoa-servicea-0.0.1-SNAPSHOT.jar
+ ```
