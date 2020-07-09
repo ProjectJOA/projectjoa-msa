@@ -14,4 +14,14 @@ gradlew bootJar
 ```
 projectjoa-eureka
  - projectjoa-eureka-0.0.1-SNAPSHOT.jar
- ```
+```
+ 
+만들어진 jar 를 확인한다.
+```
+java -jar projectjoa-eureka-0.0.1-SNAPSHOT.jar
+```
+
+Dockerfile을 빌드해서 image를 생성한다.
+``` bash
+> docker build . -t projectjoa-eureka
+```
