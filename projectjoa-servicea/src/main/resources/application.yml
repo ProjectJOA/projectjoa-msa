@@ -1,8 +1,17 @@
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
 server:
   port: ${PORT:9090}
 spring:
   application:
     name: projectjoa-servicea
+  datasource:
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+    url: jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1234qwer
+        
 eureka:
   client:
     service-url:
