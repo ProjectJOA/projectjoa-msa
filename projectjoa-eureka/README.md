@@ -39,7 +39,7 @@ Step 3/21 : RUN apt-get update
 # docker image肺 container 积己窍扁
 docker run --name projectjoa-eureka -p 9065:9065 projectjoa-eureka:latest
 # 积己等 container 立加窍扁
-docker exec -it --name projectjoa-eureka bash
+docker exec -it projectjoa-eureka bash
 
 ```
 

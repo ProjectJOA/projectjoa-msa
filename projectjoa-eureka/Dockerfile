@@ -1,5 +1,6 @@
 FROM openjdk:8u252-jdk-buster
 ENV PATH /usr/local/bin:/sbin:$PATH
+ENV EN_EUREKA_SERVER_URL 127.0.0.1
 
 ### alpine apk
 #RUN apk update 
@@ -7,9 +8,9 @@ ENV PATH /usr/local/bin:/sbin:$PATH
 #RUN apk add --update git
 ### alpine apk
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install git -y
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install git -y
 
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
@@ -31,4 +32,5 @@ RUN rm -rf ./projectjoa-eureka
 # Expose
 EXPOSE 9065
 
-ENTRYPOINT ["java","-jar","/opt/app/app.jar","&"]
+#ENTRYPOINT ["java","-jar","/opt/app/app.jar","&"]
+ENTRYPOINT java -jar -DEUREKA_SERVER_URL=$EN_EUREKA_SERVER_URL /opt/app/app.jar
