@@ -8,9 +8,9 @@ spring:
     name: projectjoa-servicea
   datasource:
     driver-class-name: 'com.mysql.cj.jdbc.Driver'
-    url: jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: 1234qwer
+    url: jdbc:mysql://${SQL_HOST:localhost}:${SQL_PORT:3306}/${SQL_DATABASE:employees}?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ${SQL_USER:root}
+    password: ${SQL_PASSWORD:1234qwer}
         
 eureka:
   client:
