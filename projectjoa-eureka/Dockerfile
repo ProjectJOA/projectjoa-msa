@@ -1,37 +1,17 @@
 FROM openjdk:8u252-jdk-buster
+
 ENV PATH /usr/local/bin:/sbin:$PATH
-
-#ENV EN_EUREKA_SERVER_URL 127.0.0.1
-
-### alpine apk
-#RUN apk update 
-#RUN apk upgrade
-#RUN apk add --update git
-### alpine apk
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install git -y
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/app
-WORKDIR /opt/app
-RUN git config --system core.sparseCheckout true
-RUN git init
-RUN git remote add -f origin https://github.com/ProjectJOA/projectjoa-msa.git
-RUN echo "projectjoa-eureka/">>.git/info/sparse-checkout
-RUN git pull origin master
-WORKDIR /opt/app/projectjoa-eureka
-RUN chmod 744 gradlew
-RUN ./gradlew bootJar
-
-RUN mv ./projectjoa-eureka*.jar /opt/app/app.jar
+RUN curl -o /opt/app/app.jar https://raw.githubusercontent.com/ProjectJOA/projectjoa-msa/master/libs/projectjoa-eureka-0.0.1-SNAPSHOT.jar
 RUN bash -c 'touch /opt/app/app.jar'
-
-WORKDIR /opt/app
-RUN rm -rf ./projectjoa-eureka
 
 # Expose
 EXPOSE 9065
 
-#ENTRYPOINT ["java","-jar","/opt/app/app.jar","&"]
 ENTRYPOINT java -jar -DEUREKA_SERVER_URL=$EN_EUREKA_SERVER_URL /opt/app/app.jar
