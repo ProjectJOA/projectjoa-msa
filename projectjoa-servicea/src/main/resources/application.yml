@@ -13,6 +13,11 @@ spring:
     password: ${SQL_PASSWORD:1234qwer}
         
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: projectjoa-servicea
   client:
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://${EUREKA_SERVER_URL:127.0.0.1}:${PORT:9065}/eureka
