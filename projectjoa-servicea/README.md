@@ -37,7 +37,9 @@ Step 3/21 : RUN apt-get update
 .......
 
 # docker image로 container 생성하기
-docker run -p 9090:9090 --name projectjoa-servicea -e EN_EUREKA_SERVER_URL=172.17.0.3 -e SQL_HOST=172.17.0.2 -e SQL_PORT=3306 -e SQL_DATABASE=employees -e SQL_USER=root -e SQL_PASSWORD=1234qwer projectjoa-servicea:latest
+docker run -p 9090:9090 --name projectjoa-servicea -e EN_EUREKA_SERVER_URL=172.17.0.3 \
+           -e SQL_HOST=172.17.0.2 -e SQL_PORT=3306 -e SQL_DATABASE=employees -e SQL_USER=root \
+           -e SQL_PASSWORD=1234qwer projectjoa-servicea:latest
 
 /*
  * EN_EUREKA_SERVER_URL : eureka server ip
