@@ -14,5 +14,5 @@ docker hub에서 mysql의 이미지를 받아서 가상환경을 생성한다.
 
 생성된 가상환경에 접속하여 sample 데이타를 생성한다.
 ``` bash
-$ mysql -h 127.0.0.1 -u root -p -P 3306 < /data/employees.sql
+$ mysql -h 127.0.0.1 -u root -p -P 3306 < /data/mysql/employees.sql
 ```

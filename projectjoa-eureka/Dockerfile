@@ -1,6 +1,7 @@
 FROM openjdk:8u252-jdk-buster
 ENV PATH /usr/local/bin:/sbin:$PATH
-ENV EN_EUREKA_SERVER_URL 127.0.0.1
+
+#ENV EN_EUREKA_SERVER_URL 127.0.0.1
 
 ### alpine apk
 #RUN apk update 

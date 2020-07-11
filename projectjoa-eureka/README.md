@@ -3,26 +3,26 @@
 ## Description
 Eureka Server
 
-## ·ÎÄÃ pc¿¡¼­ project Å×½ºÆ® ÇÏ±â
-projectjoa-eureka ´Ù¿î·Îµå ¹Ş¾Æ¼­ root µğ·ºÅä¸®¿¡¼­ gradlew ½ÇÇà
+## ë¡œì»¬ pcì—ì„œ project í…ŒìŠ¤íŠ¸ í•˜ê¸°
+projectjoa-eureka ë‹¤ìš´ë¡œë“œ ë°›ì•„ì„œ root ë””ë ‰í† ë¦¬ì—ì„œ gradlew ì‹¤í–‰
 
 ``` bash
 gradlew bootJar
 ```
 
-µğ·ºÅä¸®¿¡ ¾Æ·¡ jar ÆÄÀÏÀÌ »ı¼ºµÈ´Ù.
+ë””ë ‰í† ë¦¬ì— ì•„ë˜ jar íŒŒì¼ì´ ìƒì„±ëœë‹¤.
 ```
 projectjoa-eureka
  |-- projectjoa-eureka-0.0.1-SNAPSHOT.jar
 ```
  
-¸¸µé¾îÁø jar ¸¦ È®ÀÎÇÑ´Ù.
+ë§Œë“¤ì–´ì§„ jar ë¥¼ í™•ì¸í•œë‹¤.
 ```
 java -jar projectjoa-eureka-0.0.1-SNAPSHOT.jar
 ```
-## Docker image ¸¸µé±â
+## Docker image ë§Œë“¤ê¸°
 
-DockerfileÀ» ºôµåÇØ¼­ image¸¦ »ı¼ºÇÑ´Ù.
+Dockerfileì„ ë¹Œë“œí•´ì„œ imageë¥¼ ìƒì„±í•œë‹¤.
 ``` bash
 docker build . -t projectjoa-eureka
 
@@ -36,9 +36,9 @@ Step 3/21 : RUN apt-get update
 
 .......
 
-# docker image·Î container »ı¼ºÇÏ±â
-docker run --name projectjoa-eureka -p 9065:9065 projectjoa-eureka:latest
-# »ı¼ºµÈ container Á¢¼ÓÇÏ±â
+# docker imageë¡œ container ìƒì„±í•˜ê¸°
+docker run --name projectjoa-eureka -p 9065:9065 -e EN_EUREKA_SERVER_URL=127.0.0.1 projectjoa-eureka:latest
+# ìƒì„±ëœ container ì ‘ì†í•˜ê¸°
 docker exec -it projectjoa-eureka bash
 
 ```

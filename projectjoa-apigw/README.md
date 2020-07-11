@@ -3,15 +3,42 @@
 ## Description
 zuul
 
-## Docker image ¸¸µé±â
-projectjoa-apigw ´Ù¿î·Îµå ¹Ş¾Æ¼­ root µğ·ºÅä¸®¿¡¼­ gradlew ½ÇÇà
+## Docker image ë§Œë“¤ê¸°
+projectjoa-apigw ë‹¤ìš´ë¡œë“œ ë°›ì•„ì„œ root ë””ë ‰í† ë¦¬ì—ì„œ gradlew ì‹¤í–‰
 
 ``` bash
 gradlew bootJar
 ```
 
-µğ·ºÅä¸®¿¡ ¾Æ·¡ jar ÆÄÀÏÀÌ »ı¼ºµÈ´Ù.
+ë””ë ‰í† ë¦¬ì— ì•„ë˜ jar íŒŒì¼ì´ ìƒì„±ëœë‹¤.
 ```
 projectjoa-apigw
  - projectjoa-apigw-0.0.1-SNAPSHOT.jar
+```
+
+ë§Œë“¤ì–´ì§„ jar ë¥¼ í™•ì¸í•œë‹¤.
+```
+java -jar projectjoa-apigw-0.0.1-SNAPSHOT.jar
+```
+## Docker image ë§Œë“¤ê¸°
+
+Dockerfileì„ ë¹Œë“œí•´ì„œ imageë¥¼ ìƒì„±í•œë‹¤.
+``` bash
+docker build . -t projectjoa-apigw
+
+ending build context to Docker daemon  15.42MB
+Step 1/21 : FROM openjdk:8u252-jdk-buster
+ ---> b190ad78b520
+Step 2/21 : ENV PATH /usr/local/bin:/sbin:$PATH
+ ---> Using cache
+ ---> f64f6d8456ff
+Step 3/21 : RUN apt-get update
+
+.......
+
+# docker imageë¡œ container ìƒì„±í•˜ê¸°
+docker run --name projectjoa-apigw -p 9999:9999 -e EN_EUREKA_SERVER_URL=172.17.0.3 projectjoa-apigw:latest
+# ìƒì„±ëœ container ì ‘ì†í•˜ê¸°
+docker exec -it projectjoa-apigw bash
+
 ```
