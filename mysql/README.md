@@ -7,7 +7,7 @@
 
 docker hub에서 mysql의 이미지를 받아서 가상환경을 생성한다.
 ``` bash
-> docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234qwer  -v c:\volume_test:/data  --name mysqldb mysql
+> docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234qwer  -v c:\volume_test:/data  --name mysqldb mysql:5.7
 
 > docker exec -it mysqldb bash
 ```
