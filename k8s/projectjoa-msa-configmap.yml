@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: projectjoa-msa-config
+  labels:
+    app: projectjoa-msa
+data:
+  extenal-ip: 173.193.123.70
+  mysql.host: 173.193.123.70
+  mysql.username: root
+  mysql.database: employees

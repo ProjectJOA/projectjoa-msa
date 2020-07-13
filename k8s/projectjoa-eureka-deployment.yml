@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectjoa-eureka
+  labels:
+    app: projectjoa-msa
+spec:
+  selector:
+    matchLabels:
+      app: projectjoa-msa 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: projectjoa-msa
+        tier: projectjoa-eureka
+    spec:
+      containers:
+        - image: projectjoa/projectjoa-eureka:latest
+          imagePullPolicy: Always
+          name: projectjoa-eureka
+          ports:
+            - containerPort: 9065
+          env:
+          - name: EN_EUREKA_SERVER_URL
+            value: "172.21.198.42"            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectjoa-eureka
+  labels:
+    app: projectjoa-msa
+spec:
+  type: NodePort
+  ports:
+    - port: 9065
+      protocol: TCP
+      targetPort: 9065
+      nodePort: 30065
+  selector:
+    app: projectjoa-msa
+    tier: projectjoa-eureka           
