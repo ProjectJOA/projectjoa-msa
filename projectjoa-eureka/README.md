@@ -37,7 +37,7 @@ Step 3/21 : RUN apt-get update
 .......
 
 ### docker image로 container 생성하기
-docker run --name projectjoa-eureka -p 9065:9065 -e EN_EUREKA_SERVER_URL=127.0.0.1 projectjoa-eureka:latest
+docker run --name projectjoa-eureka -p 9065:9065 -e EN_EUREKA_SERVER_URL=127.0.0.1 -e EN_EUREKA_PORT=9065 projectjoa-eureka:latest
 ### 생성된 container 접속하기
 docker exec -it projectjoa-eureka bash
 

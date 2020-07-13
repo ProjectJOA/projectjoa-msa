@@ -23,4 +23,4 @@ RUN bash -c 'touch /opt/app/app.jar'
 # Expose
 EXPOSE 9999
 
-ENTRYPOINT java -jar -DEUREKA_SERVER_URL=$EN_EUREKA_SERVER_URL /opt/app/app.jar
+ENTRYPOINT java -jar -DEUREKA_SERVER_URL=$EN_EUREKA_SERVER_URL -DPORT=$EN_EUREKA_PORT /opt/app/app.jar

@@ -37,7 +37,7 @@ Step 3/21 : RUN apt-get update
 .......
 
 # docker image로 container 생성하기
-docker run --name projectjoa-apigw -p 9999:9999 -e EN_EUREKA_SERVER_URL=172.17.0.3 projectjoa-apigw:latest
+docker run --name projectjoa-apigw -p 9999:9999 -e EN_EUREKA_SERVER_URL=172.17.0.3 -e EN_EUREKA_PORT=9065 projectjoa-apigw:latest
 # 생성된 container 접속하기
 docker exec -it projectjoa-apigw bash
 
