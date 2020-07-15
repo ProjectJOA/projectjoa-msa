@@ -2,7 +2,7 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 
 server:
-  port: ${PORT:9090}
+  port: 9090
 spring:
   application:
     name: projectjoa-servicea
