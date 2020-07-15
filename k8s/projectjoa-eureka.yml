@@ -21,10 +21,19 @@ spec:
           imagePullPolicy: Always
           name: projectjoa-eureka
           ports:
-            - containerPort: 9065
+            - containerPort: 32065
+#            - containerPort: 9065
           env:
           - name: EN_EUREKA_SERVER_URL
-            value: "172.21.198.42"            
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: extenal_ip
+          - name: EN_EUREKA_PORT
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: eureka_port
 ---
 apiVersion: v1
 kind: Service
@@ -35,10 +44,10 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 9065
+    - port: 32065
       protocol: TCP
-      targetPort: 9065
-      nodePort: 30065
+      targetPort: 32065
+      nodePort: 32065
   selector:
     app: projectjoa-msa
-    tier: projectjoa-eureka           
+    tier: projectjoa-eureka

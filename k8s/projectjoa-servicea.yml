@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectjoa-servicea
+  labels:
+    app: projectjoa-msa
+spec:
+  selector:
+    matchLabels:
+      app: projectjoa-msa 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: projectjoa-msa
+        tier: projectjoa-servicea
+    spec:
+      containers:
+        - image: projectjoa/projectjoa-servicea:latest
+          imagePullPolicy: Always
+          name: projectjoa-servicea
+          ports:
+          - containerPort: 9090
+          env:
+          - name: EN_EUREKA_SERVER_URL
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: extenal_ip
+          - name: EN_EUREKA_PORT
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: eureka_port
+          - name: SQL_HOST
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: mysql_host
+          - name: SQL_PORT
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: mysql_port
+          - name: SQL_DATABASE
+            valueFrom:
+             configMapKeyRef:
+               name: projectjoa-msa-config
+               key: mysql_database
+          - name: SQL_USER                
+            valueFrom:
+              secretKeyRef:
+                name: mysql-credential
+                key: username       
+          - name: SQL_PASSWORD            
+            valueFrom:
+              secretKeyRef:
+                name: mysql-credential
+                key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectjoa-servicea
+  labels:
+    app: projectjoa-msa
+spec:
+#  type: NodePort
+  ports:
+    - port: 9090
+      protocol: TCP
+      targetPort: 9090
+#      nodePort: 30090
+  selector:
+    app: projectjoa-msa
+    tier: projectjoa-servicea

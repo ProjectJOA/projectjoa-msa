@@ -5,7 +5,8 @@ metadata:
   labels:
     app: projectjoa-msa
 data:
-  extenal-ip: 173.193.123.70
-  mysql.host: 173.193.123.70
-  mysql.username: root
-  mysql.database: employees
+  extenal_ip: 173.193.123.70
+  eureka_port: "32065"
+  mysql_host: 173.193.123.70
+  mysql_port: "32001"
+  mysql_database: employees

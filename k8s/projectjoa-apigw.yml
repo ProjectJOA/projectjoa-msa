@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectjoa-apigw
+  labels:
+    app: projectjoa-msa
+spec:
+  selector:
+    matchLabels:
+      app: projectjoa-msa 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: projectjoa-msa
+        tier: projectjoa-apigw
+    spec:
+      containers:
+      - image: projectjoa/projectjoa-apigw:latest
+        imagePullPolicy: Always
+        name: projectjoa-apigw
+        ports:
+          - containerPort: 9999
+        env:
+        - name: EN_EUREKA_SERVER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: projectjoa-msa-config
+              key: extenal_ip
+        - name: EN_EUREKA_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: projectjoa-msa-config
+              key: eureka_port           
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectjoa-apigw
+  labels:
+    app: projectjoa-msa
+spec:
+  type: NodePort
+  ports:
+  - port: 9999
+    protocol: TCP
+    targetPort: 9999
+    nodePort: 30099
+  selector:
+    app: projectjoa-msa
+    tier: projectjoa-apigw
