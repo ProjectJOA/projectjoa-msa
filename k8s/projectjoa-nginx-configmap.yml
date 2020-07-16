@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: projectjoa-web-configmap
+  labels:
+    app: project-msa
+data:
+  nginx.conf: |
+    worker_processes 5;
+    events {
+    }
+    http {
+      server {
+        listen 80;
+        server_name  173.193.123.70;
+        location /apigw/ {
+          proxy_pass http://173.193.123.70:30080/;
+        }
+      }
+    }
