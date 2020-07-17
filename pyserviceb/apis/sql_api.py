@@ -5,7 +5,7 @@ from django.db.models import Prefetch
 class sql_api:
     def getDepartments():
         cursor = connection.cursor()
-        sql_str = " select emp_no, birth_date, first_name, last_name, gender, hire_date from employees limit 20 "
+        sql_str = " select dept_no, dept_name from departments "
         cursor.execute(sql_str)
         result = cursor.fetchall()
         return result
