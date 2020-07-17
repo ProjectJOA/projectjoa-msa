@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: projectjoa-nginx
-        image: nginx:1.14.2
+        image: projectjoa/projectjoa-nginx:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
