@@ -12,4 +12,4 @@ RUN curl -o /usr/share/nginx/html/pro_test.html https://raw.githubusercontent.co
 # Expose
 EXPOSE 80
 
-ENTRYPOINT /usr/sbin/nginx
+#ENTRYPOINT /usr/sbin/nginx
