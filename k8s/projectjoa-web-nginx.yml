@@ -1,38 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
-  labels:
-    app: projectjoa-msa
+  name: projectjoa-nginx
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: projectjoa-msa
-  strategy:
-    type: Recreate  
+      app: projectjoa-nginx
   template:
     metadata:
       labels:
-        app: projectjoa-msa
+        app: projectjoa-nginx
     spec:
-      volumes:
-      - name: nginx
-        configMap:
-          name: projectjoa-web-configmap
       containers:
-      - name: nginx
+      - name: projectjoa-nginx
         image: nginx:1.14.2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          readOnly: true
+          name: projectjoa-nginx-conf-pv
+          subPath: nginx.conf
+      volumes:
+      - name: projectjoa-nginx-conf-pv
+        configMap:
+          name: projectjoa-nginx-configmap
+          items:
+          - key: nginx.conf
+            path: nginx.conf
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx
-  labels:
-    app: projectjoa-msa
 spec:
   type: NodePort
   ports:
@@ -41,4 +44,4 @@ spec:
     targetPort: 80
     nodePort: 30080
   selector:
-    app: projectjoa-msa
+    app: projectjoa-nginx
