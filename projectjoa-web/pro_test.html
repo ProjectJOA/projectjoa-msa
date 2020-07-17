@@ -1,82 +1,120 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-function update_form(b_no){
+function call_java_api(){
+  var api_url = "/apigw/projectjoa-servicea/test";
   $.ajax({
-    url: "/apigw/projectjoa-servicea/test",
+    url: api_url,
     type: "GET",
     cache: false,
     dataType: "json",
     data: {},
     success: function(data){
-      console.log('test123343')
-      setSerivceA2Table();    
+      console.log('test123343');
+      setSerivceA2Table(data, '');
     },
-    
-    error: function (request, status, error){        
+
+    error: function (request, status, error){
         var msg = "ERROR : " + request.status + "<br>"
-      msg +=  + "내용 : " + request.responseText + "<br>" + error;
-      console.log(msg);              
+      msg +=  + "error : " + request.responseText + "<br>" + error;
+      console.log(msg);
     }
   });
 }
 
-function setSerivceA2Table(){
+function call_py_api(){
+  var api_url = "/apigw/projectjoa-pyserviceb/pytest/";
+  $.ajax({
+    url: api_url,
+    type: "GET",
+    cache: false,
+    dataType: "json",
+    data: {},
+    success: function(data){
+      console.log('test123343');
+      setSerivceA2Table(data, 'pyapi');
+    },
 
-
-	var data = [{"gender":"M","emp_no":10001,"birth_date":"1953-09-02","last_name":"Facello","hire_date":"1986-06-26","first_name":"Georgi"},{"gender":"F","emp_no":10002,"birth_date":"1964-06-02","last_name":"Simmel","hire_date":"1985-11-21","first_name":"Bezalel"},{"gender":"M","emp_no":10003,"birth_date":"1959-12-03","last_name":"Bamford","hire_date":"1986-08-28","first_name":"Parto"},{"gender":"M","emp_no":10004,"birth_date":"1954-05-01","last_name":"Koblick","hire_date":"1986-12-01","first_name":"Chirstian"},{"gender":"M","emp_no":10005,"birth_date":"1955-01-21","last_name":"Maliniak","hire_date":"1989-09-12","first_name":"Kyoichi"},{"gender":"F","emp_no":10006,"birth_date":"1953-04-20","last_name":"Preusig","hire_date":"1989-06-02","first_name":"Anneke"},{"gender":"F","emp_no":10007,"birth_date":"1957-05-23","last_name":"Zielinski","hire_date":"1989-02-10","first_name":"Tzvetan"},{"gender":"M","emp_no":10008,"birth_date":"1958-02-19","last_name":"Kalloufi","hire_date":"1994-09-15","first_name":"Saniya"},{"gender":"F","emp_no":10009,"birth_date":"1952-04-19","last_name":"Peac","hire_date":"1985-02-18","first_name":"Sumant"},{"gender":"F","emp_no":10010,"birth_date":"1963-06-01","last_name":"Piveteau","hire_date":"1989-08-24","first_name":"Duangkaew"},{"gender":"F","emp_no":10011,"birth_date":"1953-11-07","last_name":"Sluis","hire_date":"1990-01-22","first_name":"Mary"},{"gender":"M","emp_no":10012,"birth_date":"1960-10-04","last_name":"Bridgland","hire_date":"1992-12-18","first_name":"Patricio"},{"gender":"M","emp_no":10013,"birth_date":"1963-06-07","last_name":"Terkki","hire_date":"1985-10-20","first_name":"Eberhardt"},{"gender":"M","emp_no":10014,"birth_date":"1956-02-12","last_name":"Genin","hire_date":"1987-03-11","first_name":"Berni"},{"gender":"M","emp_no":10015,"birth_date":"1959-08-19","last_name":"Nooteboom","hire_date":"1987-07-02","first_name":"Guoxiang"},{"gender":"M","emp_no":10016,"birth_date":"1961-05-02","last_name":"Cappelletti","hire_date":"1995-01-27","first_name":"Kazuhito"},{"gender":"F","emp_no":10017,"birth_date":"1958-07-06","last_name":"Bouloucos","hire_date":"1993-08-03","first_name":"Cristinel"},{"gender":"F","emp_no":10018,"birth_date":"1954-06-19","last_name":"Peha","hire_date":"1987-04-03","first_name":"Kazuhide"},{"gender":"M","emp_no":10019,"birth_date":"1953-01-23","last_name":"Haddadi","hire_date":"1999-04-30","first_name":"Lillian"},{"gender":"M","emp_no":10020,"birth_date":"1952-12-24","last_name":"Warwick","hire_date":"1991-01-26","first_name":"Mayuko"}];
-
-	var currentID = 541;
-
-	var transform = {
-	    tag: 'tr',
-	    children: [{
-	        "tag": "td",
-	            "html": "${emp_no}"
-	    }, {
-	        "tag": "td",
-	            "html": "${last_name}"
-	    }, {
-	        "tag": "td",
-	            "html": "${first_name}"
-	    }, {
-	        "tag": "td",
-	            "html": "${gender}"
-	    }, {
-	        "tag": "td",
-	            "html": "${birth_date}"
-	    }, {
-	        "tag": "td",
-	            "html": "${hire_date}"
-	    }]
-	};
-
-	$('#placar > tbody ').json2html(data, transform);
+    error: function (request, status, error){
+        var msg = "ERROR : " + request.status + "<br>"
+      msg +=  + "error : " + request.responseText + "<br>" + error;
+      console.log(msg);
+    }
+  });
 }
 
+function setSerivceA2Table(data,type){
+  console.log(type);
+  console.log(data);
+  if(type!='pyapi'){
+    $.each(data, function(index,item) {
+            console.log(item);
+      var eachrow1= "<tr>"
+                  + "<td>"+item["emp_no"] +"</td>"
+                  + "<td>"+item["last_name"] +"</td>"
+                  + "<td>"+item["first_name"] +"</td>"
+                  + "<td>"+item["gender"] +"</td>"
+                  + "<td>"+item["hire_date"] +"</td>"
+                  + "<td>"+item["birth_date"] +"</td>"
+                  + "</tr>";
+      $("#javaapi").append(eachrow1);
+    });
+  } else {
+    $.each(data["result"], function(index,item) {
+      var eachrow2= "<tr>"
+                  + "<td>"+item[0]+"</td>"
+                  + "<td>"+item[1]+"</td>"
+                  + "<td>"+item[2]+"</td>"
+                  + "<td>"+item[3]+"</td>"
+                  + "<td>"+item[4]+"</td>"
+                  + "<td>"+item[5]+"</td>"
+                  + "</tr>";
+      $("#pyapi").append(eachrow2);
+    });
+  }
+}
 
-update_form();
+call_java_api();
+call_py_api();
 </script>
 </head>
 <body>
-
-	<div class="container">
-    <p>
-        <table id="placar" class="table table-condensed  table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Luchador</th>
-                    <th>K</th>
-                    <th>D</th>
-                    <th>Pontos</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-	</div>
-
-</body>	
+        <p>
+          projectjoa-servicea:<br>
+          <div>
+            <table style="width: 80%">
+              <thead>
+                <th>emp_no</th>
+                <th>last_name</th>
+                <th>first_name</th>
+                <th>gender</th>
+                <th>birth_date</th>
+                <th>hire_date</th>
+              </thead>
+              <tbody id="javaapi">
+              </tbody>
+            </table>
+          </div>
+        </p>
+        <p>----------------------------------</p>
+        <p>
+          projectjoa-pyserviceb:<br>
+          <div>
+            <table style="width: 80%">
+              <thead>
+                <th>item1</th>
+                <th>item2</th>
+                <th>item3</th>
+                <th>item4</th>
+                <th>item5</th>
+                <th>item6</th>
+              </thead>
+              <tbody id="pyapi">
+              </tbody>
+            </table>
+          </div>
+        </p>
+</body>
 </html>
