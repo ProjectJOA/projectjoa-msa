@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   name: projectjoa-msa-config
   labels:
-    app: projectjoa-msa
+    app: projectjoa-msa-config
 data:
-  extenal_ip: 173.193.123.70
+  extenal_ip: 169.51.205.177
   eureka_port: "32065"
-  mysql_host: 173.193.123.70
+  mysql_host: 169.51.205.177
   mysql_port: "32001"
   mysql_database: employees

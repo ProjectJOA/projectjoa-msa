@@ -1,24 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: projectjoa-apigw
-  labels:
-    app: projectjoa-msa
+  name: projectjoa-apigw-depl
 spec:
   selector:
     matchLabels:
-      app: projectjoa-msa 
-  strategy:
-    type: Recreate
+      app: projectjoa-apigw-label 
   template:
     metadata:
+      name: projectjoa-apigw
       labels:
-        app: projectjoa-msa
-        tier: projectjoa-apigw
+        app: projectjoa-apigw-label
     spec:
       containers:
       - image: projectjoa/projectjoa-apigw:latest
-        imagePullPolicy: Always
         name: projectjoa-apigw
         ports:
           - containerPort: 9999
@@ -37,9 +32,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: projectjoa-apigw
-  labels:
-    app: projectjoa-msa
+  name: projectjoa-apigw-svc
 spec:
   type: NodePort
   ports:
@@ -48,5 +41,4 @@ spec:
     targetPort: 9999
     nodePort: 30099
   selector:
-    app: projectjoa-msa
-    tier: projectjoa-apigw
+    app: projectjoa-apigw-label

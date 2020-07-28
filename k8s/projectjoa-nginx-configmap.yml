@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: projectjoa-nginx-configmap
   labels:
-    app: project-msa
+    app: projectjoa-nginx-configmap
 data:
   nginx.conf: |
     user  nginx;
@@ -34,7 +34,7 @@ data:
 
         server {
             listen       80;
-            server_name  173.193.123.70;
+            server_name  169.51.205.177;
             access_log  /var/log/nginx/host.access.log  main;
 
             location / {
@@ -43,7 +43,7 @@ data:
             }
 
             location /apigw/ {
-                  proxy_pass http://173.193.123.70:30099/;
+                  proxy_pass http://169.51.205.177:30099/;
             }
 
             error_page   500 502 503 504  /50x.html;

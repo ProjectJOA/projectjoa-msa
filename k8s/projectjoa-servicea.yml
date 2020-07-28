@@ -1,24 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: projectjoa-servicea
-  labels:
-    app: projectjoa-msa
+  name: projectjoa-servicea-depl
 spec:
+  replicas: 2  
   selector:
     matchLabels:
-      app: projectjoa-msa 
-  strategy:
-    type: Recreate
+      app: projectjoa-servicea-label
   template:
     metadata:
+      name: projectjoa-servicea 
       labels:
-        app: projectjoa-msa
-        tier: projectjoa-servicea
+        app: projectjoa-servicea-label
     spec:
       containers:
         - image: projectjoa/projectjoa-servicea:latest
-          imagePullPolicy: Always
           name: projectjoa-servicea
           ports:
           - containerPort: 9090
@@ -62,9 +58,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: projectjoa-servicea
-  labels:
-    app: projectjoa-msa
+  name: projectjoa-servicea-svc
 spec:
 #  type: NodePort
   ports:
@@ -73,5 +67,4 @@ spec:
       targetPort: 9090
 #      nodePort: 30090
   selector:
-    app: projectjoa-msa
-    tier: projectjoa-servicea
+    app: projectjoa-servicea-label

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: projectjoa-nginx
+  name: projectjoa-nginx-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: projectjoa-nginx
+      app: projectjoa-nginx-label
   template:
     metadata:
+      name: projectjoa-nginx
       labels:
-        app: projectjoa-nginx
+        app: projectjoa-nginx-label
     spec:
       containers:
       - name: projectjoa-nginx
         image: projectjoa/projectjoa-nginx:latest
-        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http
@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-svc
 spec:
   type: NodePort
   ports:
@@ -44,4 +44,4 @@ spec:
     targetPort: 80
     nodePort: 30080
   selector:
-    app: projectjoa-nginx
+    app: projectjoa-nginx-label
