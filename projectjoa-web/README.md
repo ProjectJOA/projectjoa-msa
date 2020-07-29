@@ -22,5 +22,7 @@ Step 2/6 : ENV PATH /usr/local/bin:/usr/sbin:/sbin:$PATH
 docker tag 5a3e7161b085 projectjoa/projectjoa-nginx:latest
 docker push projectjoa/projectjoa-nginx
 The push refers to repository [docker.io/projectjoa/projectjoa-nginx]
-348e1da1708d: Pushing [==================================================>]  6.656kB                                    2ce33cd22ebe: Pushing [===================>                               ]  6.145MB/15.88MB                            ...                                                         
+348e1da1708d: Pushing [==================================================>]  6.656kB
+2ce33cd22ebe: Pushing [===================>                               ]  6.145MB/15.88MB
+...                                                         
 ```

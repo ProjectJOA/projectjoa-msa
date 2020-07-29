@@ -33,5 +33,10 @@ docker tag bfa1c2857a67 projectjoa/projectjoa-pyserviceb:latest
 docker push projectjoa/projectjoa-pyserviceb
 
 The push refers to repository [docker.io/projectjoa/projectjoa-pyserviceb]
-8e41c1a5b12c: Pushing [==================================================>]  31.74kB                                    b45ffb2e78ff: Pushing [==================================================>]  32.77kB                                    6d56b8c76d9c: Pushing [=============>                                     ]  13.24MB/47.79MB                            dfad14e86c05: Pushing [==================================>                ]  17.81MB/25.93MB                            ....                                                
+
+8e41c1a5b12c: Pushing [==================================================>]  31.74kB
+b45ffb2e78ff: Pushing [==================================================>]  32.77kB
+6d56b8c76d9c: Pushing [=============>                                     ]  13.24MB/47.79MB
+dfad14e86c05: Pushing [==================================>                ]  17.81MB/25.93MB
+....                                                
 ```

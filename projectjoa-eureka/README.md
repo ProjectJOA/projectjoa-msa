@@ -50,6 +50,7 @@ docker tag [image id] projectjoa/projectjoa-eureka:latest
 docker push projectjoa/projectjoa-eureka
 
 The push refers to repository [docker.io/projectjoa/projectjoa-eureka]
-1e0a0ca39c12: Pushed                                                                                                    f7f31740fc5d: Pushed    
+1e0a0ca39c12: Pushed
+f7f31740fc5d: Pushed
 .....
 ```
